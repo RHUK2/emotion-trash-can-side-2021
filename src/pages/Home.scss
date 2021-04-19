@@ -1,0 +1,73 @@
+.home {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__background-image {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  &__message,
+  &__message2 {
+    font-size: 4vw;
+    opacity: 0;
+    color: white;
+    text-shadow: 3px 3px 10px black, -2px 1px 20px black;
+  }
+  &__message {
+    animation: fade-in-up 1.5s linear forwards;
+  }
+  &__message2 {
+    margin-top: 20px;
+    animation: fade-in-up 1.5s linear 0.75s forwards;
+  }
+  &__button {
+    margin-top: 40px;
+    border-radius: 10px;
+    padding: 10px 50px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #6450cb;
+    border: 2px solid #6450cb;
+    opacity: 0;
+    transition: background-color 0.1s linear, border 0.1s, color 0.1s linear;
+    animation: fade-in 1.2s ease-in-out 2.5s forwards;
+  }
+  &__button:hover {
+    background-color: #8770fe;
+    border: 2px solid #8770fe;
+  }
+  &__button:active {
+    background-color: #ffffff;
+    color: #8770fe;
+  }
+}
+@keyframes fade-in-up {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media screen and (min-width: 769px) {
+}
