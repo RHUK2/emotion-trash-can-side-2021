@@ -1,0 +1,75 @@
+.paper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.note {
+  position: relative;
+  &__image {
+    width: 350px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px black, -2px 1px 20px black;
+  }
+  &__textarea {
+    position: absolute;
+    top: 19%;
+    left: 13.2%;
+    resize: none;
+    width: calc(100% - (13% * 2));
+    height: 58%;
+    line-height: 20.6px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: black;
+    font-weight: bold;
+    z-index: 1;
+  }
+}
+.move-button {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  &__next,
+  &__previous {
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #e9e9e9;
+    font-size: 17px;
+  }
+  &__next {
+    margin-left: 30px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .paper {
+    flex-direction: row;
+  }
+  .note {
+    margin: 20px 0px;
+    &__image {
+      width: 500px;
+      height: auto;
+    }
+    &__textarea {
+      line-height: 28.7px;
+      font-size: 18px;
+    }
+  }
+  .move-button {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: 30px;
+    &__previous {
+      margin-top: 20px;
+    }
+    &__next {
+      margin-left: 0px;
+    }
+  }
+}

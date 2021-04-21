@@ -4,14 +4,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  &__background-image {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
   &__message,
   &__message2 {
     font-size: 4vw;
@@ -31,13 +23,13 @@
     border-radius: 10px;
     padding: 10px 50px;
     color: white;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
     background-color: #6450cb;
     border: 2px solid #6450cb;
     opacity: 0;
     transition: background-color 0.1s linear, border 0.1s, color 0.1s linear;
-    animation: fade-in 1.2s ease-in-out 2.5s forwards;
+    animation: fade-in 1.2s ease-in-out 2s forwards;
   }
   &__button:hover {
     background-color: #8770fe;
@@ -68,6 +60,4 @@
   to {
     opacity: 1;
   }
-}
-@media screen and (min-width: 769px) {
 }
