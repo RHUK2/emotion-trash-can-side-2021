@@ -7,6 +7,8 @@
 }
 .note {
   position: relative;
+  transform: translateY(-100%);
+  animation: move-down 2s ease-in-out forwards;
   &__image {
     width: 350px;
     height: auto;
@@ -28,6 +30,37 @@
     font-weight: bold;
     z-index: 1;
   }
+  &__textcount {
+    position: absolute;
+    bottom: 15%;
+    left: 13.2%;
+    font-size: 13px;
+  }
+  &__to,
+  &__from {
+    width: 100px;
+    outline: none;
+    border: none;
+    background: transparent;
+  }
+  &__to {
+    position: absolute;
+    top: 11.5%;
+    left: 19%;
+  }
+  &__from {
+    position: absolute;
+    bottom: 13%;
+    right: 9%;
+  }
+}
+@keyframes move-down {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0px);
+  }
 }
 .move-button {
   display: flex;
@@ -38,14 +71,12 @@
     width: 80px;
     height: 40px;
     border-radius: 10px;
-    background-color: #e9e9e9;
     font-size: 17px;
   }
   &__next {
     margin-left: 30px;
   }
 }
-
 @media screen and (min-width: 769px) {
   .paper {
     flex-direction: row;
@@ -59,6 +90,22 @@
     &__textarea {
       line-height: 28.7px;
       font-size: 18px;
+    }
+    &__textcount {
+      font-size: 15px;
+    }
+    &__to,
+    &__from {
+      width: 120px;
+      font-size: 17px;
+    }
+    &__to {
+      top: 11.8%;
+      left: 20%;
+    }
+    &__from {
+      bottom: 12.8%;
+      right: 12%;
     }
   }
   .move-button {

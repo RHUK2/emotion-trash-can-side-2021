@@ -3,31 +3,51 @@ import { Link } from 'react-router-dom';
 
 import './Paper.scss';
 
-const useTest = () => {
-  const element = useRef();
-  useEffect(() => {
-    const { current } = element;
-    if (current) {
-      current.addEventListener('keypress', handleKeypress);
+const useCheckText = (maxLength = 100) => {
+  const [textcount, setTextcount] = useState(0);
+  const [text, setText] = useState('');
+  if (typeof maxLength !== 'number') {
+    return;
+  }
+  const handleCheckText = event => {
+    const { value } = event.target;
+    setTextcount(value.length);
+    setText(value);
+    if (value.length > maxLength) {
+      event.target.value = value.substring(0, maxLength);
+      setTextcount(maxLength);
+      alert(`${maxLength}자를 초과하였습니다.`);
+      return -1;
     }
-    return () => {
-      current.removeEventListener('keypress', handleKeypress);
-    };
-  }, []);
-  return element;
+  };
+  return { textcount, text, handleCheckText };
 };
 
-const handleKeypress = event => {
-  const { value } = event.target;
-  if (value.length > 10) {
-    event.target.value = value.substring(0, 10);
-    alert('글자 수 초과');
-    return -1;
-  }
+const useInputData = () => {
+  const element = useRef();
+  const [data, setData] = useState('');
+  const getData = event => {
+    setData(event.target.value);
+  };
+  useEffect(() => {
+    const target = element.current;
+    if (target) {
+      target.addEventListener('keyup', getData);
+    }
+    return () => {
+      if (target) {
+        target.removeEventListener('keyup', getData);
+      }
+    };
+  }, []);
+  return [element, data];
 };
 
 const Paper = () => {
-  const textInput = useTest();
+  const MAX_LENGTH = 500;
+  const { textcount, text, handleCheckText } = useCheckText(MAX_LENGTH);
+  const [inputTo, dataTo] = useInputData();
+  const [inputFrom, dataFrom] = useInputData();
   return (
     <div className="paper">
       <div className="note">
@@ -36,18 +56,31 @@ const Paper = () => {
           src="https://emotion-trash-can-2021-side.s3.ap-northeast-2.amazonaws.com/assets/paper.jpg"
           alt=""
         />
+        <input ref={inputTo} className="note__to" placeholder="..."></input>
         <textarea
-          ref={textInput}
+          onKeyUp={handleCheckText}
           className="note__textarea"
-          placeholder="감정을 분출하세요."
+          placeholder="감정을 표출하세요."
         ></textarea>
-        <span></span>
+        <input ref={inputFrom} className="note__from" placeholder="..."></input>
+        <span className="note__textcount">
+          ({textcount} / {MAX_LENGTH})
+        </span>
       </div>
       <div className="move-button">
         <Link to="/">
           <button className="move-button__previous">prev</button>
         </Link>
-        <Link to="/2">
+        <Link
+          to={{
+            pathname: '/2',
+            state: {
+              dataTo,
+              dataFrom,
+              text
+            }
+          }}
+        >
           <button className="move-button__next">next</button>
         </Link>
       </div>

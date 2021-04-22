@@ -22,22 +22,10 @@
     margin-top: 40px;
     border-radius: 10px;
     padding: 10px 50px;
-    color: white;
     font-size: 15px;
     font-weight: 600;
-    background-color: #6450cb;
-    border: 2px solid #6450cb;
     opacity: 0;
-    transition: background-color 0.1s linear, border 0.1s, color 0.1s linear;
     animation: fade-in 1.2s ease-in-out 2s forwards;
-  }
-  &__button:hover {
-    background-color: #8770fe;
-    border: 2px solid #8770fe;
-  }
-  &__button:active {
-    background-color: #ffffff;
-    color: #8770fe;
   }
 }
 @keyframes fade-in-up {

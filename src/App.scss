@@ -1,6 +1,18 @@
 button {
   border: none;
   cursor: pointer;
+  color: white;
+  background-color: #6450cb;
+  border: 2px solid #6450cb;
+  transition: background-color 0.1s linear, border 0.1s, color 0.1s linear;
+}
+button:hover {
+  background-color: #8770fe;
+  border: 2px solid #8770fe;
+}
+button:active {
+  background-color: #ffffff;
+  color: #8770fe;
 }
 
 .background-image {
