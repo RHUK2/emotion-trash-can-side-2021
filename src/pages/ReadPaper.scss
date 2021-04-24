@@ -1,0 +1,67 @@
+.readpaper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+  &__content {
+    padding: 30px 0px;
+    width: 35%;
+    max-width: 500px;
+    min-width: 360px;
+  }
+  &__text {
+    width: 100%;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    color: white;
+    font-size: 25px;
+    transform: translateY(100vh);
+    animation: credit 100s linear forwards;
+  }
+  &__icon {
+    width: 5%;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    justify-content: space-between;
+    align-items: center;
+    i {
+      font-size: 35px;
+      color: white;
+      cursor: pointer;
+    }
+    i:hover {
+      animation: twist 1s linear infinite;
+    }
+    .fa-burn:hover {
+      color: red;
+    }
+  }
+}
+@keyframes credit {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(-200vh);
+  }
+}
+@keyframes twist {
+  from {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(15deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}

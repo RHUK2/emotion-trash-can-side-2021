@@ -13,11 +13,13 @@ const useDragAndDrop = () => {
     const saveFiles = [];
     if (event.dataTransfer.items) {
       if (event.dataTransfer.items.length > 3) {
+        // eslint-disable-next-line no-alert
         alert('이미지 파일 첨부는 최대 3장까지 가능합니다.');
         return -1;
       }
       Array.prototype.forEach.call(event.dataTransfer.items, item => {
         if (item.type.split('/')[0] !== 'image') {
+          // eslint-disable-next-line no-alert
           alert('이미지 파일만 가능합니다.');
           return -1;
         }
@@ -29,11 +31,13 @@ const useDragAndDrop = () => {
       });
     } else {
       if (event.dataTransfer.files.length > 3) {
+        // eslint-disable-next-line no-alert
         alert('이미지 파일 첨부는 최대 3장까지 가능합니다.');
         return -1;
       }
       Array.prototype.forEach.call(event.dataTransfer.files, file => {
         if (file.type.split('/')[0] === 'image') {
+          // eslint-disable-next-line no-alert
           alert('이미지 파일만 가능합니다.');
           return -1;
         }
@@ -68,6 +72,7 @@ const useDragAndDrop = () => {
     const saveFiles = [];
     if (!event.target.files) return -1;
     if (event.target.files.length > 3) {
+      // eslint-disable-next-line no-alert
       alert('이미지 파일 첨부는 최대 3장까지 가능합니다.');
       return -1;
     }
@@ -97,9 +102,17 @@ const useDragAndDrop = () => {
 
 const PaperImage = props => {
   const { dragdropElement, inputFileElement, files } = useDragAndDrop();
-  const {
-    location: { state: dataTo, dataFrom, text }
-  } = props;
+  const [state] = useState(props.location.state);
+  if (!state) {
+    // eslint-disable-next-line no-alert
+    alert('잘못된 접근입니다.');
+    props.history.push('/');
+  } else if (state.dataTo === '' || state.dataFrom === '' || state.text === '') {
+    // eslint-disable-next-line no-alert
+    alert('3가지 항목 모두 작성해주세요.');
+    props.history.push('/1');
+    return -1;
+  }
   return (
     <div className="paperimage">
       <h4 className="paperimage__message">지우고 싶은 사진이 있나요?</h4>
@@ -120,7 +133,8 @@ const PaperImage = props => {
             </div>
           ) : (
             <p>
-              이미지 파일을 넣어주세요.<br></br>(드래그드롭 or 클릭)<br></br>(최대 3장))
+              이미지 파일을 넣어주세요.<br></br>(드래그드롭 or 클릭)<br></br>(최대 3장)<br></br>
+              (필수 아님)
             </p>
           )}
         </label>
@@ -132,9 +146,7 @@ const PaperImage = props => {
             to={{
               pathname: '/3',
               state: {
-                dataTo,
-                dataFrom,
-                text,
+                ...state,
                 files
               }
             }}

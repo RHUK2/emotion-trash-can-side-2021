@@ -1,7 +1,17 @@
+@font-face {
+  font-family: 'Cafe24Oneprettynight';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff')
+      format('woff'),
+    local(-apple-system);
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  font-family: 'Cafe24Oneprettynight';
 }
 
 html,

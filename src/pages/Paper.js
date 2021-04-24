@@ -16,6 +16,7 @@ const useCheckText = (maxLength = 100) => {
     if (value.length > maxLength) {
       event.target.value = value.substring(0, maxLength);
       setTextcount(maxLength);
+      // eslint-disable-next-line no-alert
       alert(`${maxLength}자를 초과하였습니다.`);
       return -1;
     }
@@ -43,11 +44,12 @@ const useInputData = () => {
   return [element, data];
 };
 
-const Paper = () => {
+const Paper = props => {
   const MAX_LENGTH = 500;
   const { textcount, text, handleCheckText } = useCheckText(MAX_LENGTH);
   const [inputTo, dataTo] = useInputData();
   const [inputFrom, dataFrom] = useInputData();
+
   return (
     <div className="paper">
       <div className="note">
@@ -56,13 +58,13 @@ const Paper = () => {
           src="https://emotion-trash-can-2021-side.s3.ap-northeast-2.amazonaws.com/assets/paper.jpg"
           alt=""
         />
-        <input ref={inputTo} className="note__to" placeholder="..."></input>
+        <input ref={inputTo} className="note__to" placeholder="...에게(필수)"></input>
         <textarea
           onKeyUp={handleCheckText}
           className="note__textarea"
-          placeholder="감정을 표출하세요."
+          placeholder="감정을 표출하세요.(필수)"
         ></textarea>
-        <input ref={inputFrom} className="note__from" placeholder="..."></input>
+        <input ref={inputFrom} className="note__from" placeholder="...로부터(필수)"></input>
         <span className="note__textcount">
           ({textcount} / {MAX_LENGTH})
         </span>
