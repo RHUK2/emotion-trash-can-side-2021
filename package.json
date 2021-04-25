@@ -48,5 +48,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "2.2.1"
-  }
+  },
+  "homepage": "https://rhu5.github.com/emotion-trash-can-2021/"
 }
