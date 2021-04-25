@@ -35,9 +35,21 @@ const useVolume = () => {
 const ReadPaper = props => {
   const [state] = useState(props.location.state);
   const [audio, button] = useVolume();
+  useEffect(() => {
+    window.addEventListener('beforeunload', () => {
+      props.history.push('/');
+      return -1;
+    });
+    return () => {
+      window.removeEventListener('beforeunload', () => {
+        props.history.push('/');
+        return -1;
+      });
+    };
+  }, []);
   if (state === undefined) {
     // eslint-disable-next-line no-alert
-    alert('잘못된 접근입니다.');
+    alert('홈으로 이동합니다.');
     props.history.push('/');
     return -1;
   }
@@ -71,7 +83,7 @@ const ReadPaper = props => {
           to={{
             pathname: '/4',
             state: {
-              files: state.file
+              files: state.files
             }
           }}
         >

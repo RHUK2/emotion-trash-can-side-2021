@@ -105,9 +105,11 @@ const PaperImage = props => {
   const [state] = useState(props.location.state);
   if (!state) {
     // eslint-disable-next-line no-alert
-    alert('잘못된 접근입니다.');
+    alert('홈으로 이동합니다.');
     props.history.push('/');
-  } else if (state.dataTo === '' || state.dataFrom === '' || state.text === '') {
+    return -1;
+  }
+  if (state.dataTo === '' || state.dataFrom === '' || state.text === '') {
     // eslint-disable-next-line no-alert
     alert('3가지 항목 모두 작성해주세요.');
     props.history.push('/1');
@@ -127,8 +129,8 @@ const PaperImage = props => {
           ></input>
           {files.length !== 0 ? (
             <div className="dropbox__images">
-              {files.map(file => (
-                <img title={file.fileName} src={file.fileUrl} alt={file.fileName} />
+              {files.map((file, index) => (
+                <img key={index} title={file.fileName} src={file.fileUrl} alt={file.fileName} />
               ))}
             </div>
           ) : (
