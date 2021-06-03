@@ -19,7 +19,7 @@ const backgroundImages = [
 
 const useRandomArrayData = array => {
   const randomIndex = Math.floor(Math.random() * array.length);
-  const [data] = useState(array[randomIndex]);
+  const data = array[randomIndex];
   return data;
 };
 

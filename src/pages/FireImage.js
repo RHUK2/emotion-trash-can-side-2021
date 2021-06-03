@@ -6,6 +6,7 @@ import './FireImage.scss';
 
 const FireImage = props => {
   const [state] = useState(props.location.state);
+
   useEffect(() => {
     window.addEventListener('beforeunload', () => {
       props.history.push('/');
@@ -18,6 +19,7 @@ const FireImage = props => {
       });
     };
   }, []);
+
   if (!state) {
     // eslint-disable-next-line no-alert
     alert('홈으로 이동합니다.');

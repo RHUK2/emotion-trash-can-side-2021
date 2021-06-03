@@ -35,6 +35,7 @@ const useVolume = () => {
 const ReadPaper = props => {
   const [state] = useState(props.location.state);
   const [audio, button] = useVolume();
+
   useEffect(() => {
     window.addEventListener('beforeunload', () => {
       props.history.push('/');
@@ -47,6 +48,7 @@ const ReadPaper = props => {
       });
     };
   }, []);
+
   if (state === undefined) {
     // eslint-disable-next-line no-alert
     alert('홈으로 이동합니다.');

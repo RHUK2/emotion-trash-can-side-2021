@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 
 import './Paper.scss';
 
+const MAX_LENGTH = 500;
+
 const useCheckText = (maxLength = 100) => {
+  const textarea = useRef();
   const [textcount, setTextcount] = useState(0);
   const [text, setText] = useState('');
-  if (typeof maxLength !== 'number') {
-    return;
-  }
+
   const handleCheckText = event => {
     const { value } = event.target;
     setTextcount(value.length);
@@ -21,15 +22,30 @@ const useCheckText = (maxLength = 100) => {
       return -1;
     }
   };
-  return { textcount, text, handleCheckText };
+
+  useEffect(() => {
+    const target = textarea.current;
+    if (target) {
+      target.addEventListener('keyup', handleCheckText);
+    }
+    return () => {
+      if (target) {
+        target.removeEventListener('keyup', handleCheckText);
+      }
+    };
+  }, []);
+
+  return { textarea, textcount, text };
 };
 
 const useInputData = () => {
   const element = useRef();
   const [data, setData] = useState('');
+
   const getData = event => {
     setData(event.target.value);
   };
+
   useEffect(() => {
     const target = element.current;
     if (target) {
@@ -41,12 +57,12 @@ const useInputData = () => {
       }
     };
   }, []);
+
   return [element, data];
 };
 
 const Paper = props => {
-  const MAX_LENGTH = 500;
-  const { textcount, text, handleCheckText } = useCheckText(MAX_LENGTH);
+  const { textarea, textcount, text } = useCheckText(MAX_LENGTH);
   const [inputTo, dataTo] = useInputData();
   const [inputFrom, dataFrom] = useInputData();
 
@@ -60,7 +76,7 @@ const Paper = props => {
         />
         <input ref={inputTo} className="note__to" placeholder="...에게(필수)"></input>
         <textarea
-          onKeyUp={handleCheckText}
+          ref={textarea}
           className="note__textarea"
           placeholder="감정을 표출하세요.(필수)"
         ></textarea>
